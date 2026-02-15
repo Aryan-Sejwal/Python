@@ -8,4 +8,4 @@ while temp>0:
 if num==rev :
   print('The number is paladrome')  
 else :  
-   print('Number is not palagrome')
+   print('Number is not paladrome')
