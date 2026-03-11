@@ -1,6 +1,5 @@
 n = int(input("Enter number of movies: "))
 movies = {}
-
 for i in range(n):
     name = input("\nMovie name: ")
     year = int(input("Year: "))
