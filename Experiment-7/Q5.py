@@ -17,4 +17,4 @@ except ZeroDivisionError:
     print("Error: Division by zero")
 
 except Exception as e:
-    print("Error:", e)
+    print("Error:",  e)
