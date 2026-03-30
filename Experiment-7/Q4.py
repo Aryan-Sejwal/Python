@@ -1,15 +1,12 @@
 N = int(input())
 
-for i in range (N):
+for i in range(N):
     try:
         a, b = input().split()
-        a = int(a)
-        b = int(b)
-        
-        print(a // b)
+        print(int(a) // int(b))
     
-    except ZeroDivisionError :
-        print("Interger division by zero")
+    except ZeroDivisionError as e:
+        print("Error Code:", e)
     
-    except ValueError :
-        print("invalid literal for int()")
+    except ValueError as e:
+        print("Error Code:", e)
