@@ -1,0 +1,89 @@
+import tkinter as tk
+from tkinter import messagebox
+import sqlite3
+
+# ---------------- DATABASE ----------------
+conn = sqlite3.connect("tasks.db")
+cursor = conn.cursor()
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS tasks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    task TEXT
+)
+""")
+conn.commit()
+
+# ---------------- FUNCTIONS ----------------
+def load_tasks():
+    listbox.delete(0, tk.END)
+    cursor.execute("SELECT * FROM tasks")
+    rows = cursor.fetchall()
+    for row in rows:
+        listbox.insert(tk.END, row[1])
+
+def add_task():
+    task = entry.get()
+    if task == "":
+        messagebox.showwarning("Warning", "Enter a task!")
+        return
+    
+    cursor.execute("INSERT INTO tasks (task) VALUES (?)", (task,))
+    conn.commit()
+    entry.delete(0, tk.END)
+    load_tasks()
+
+def delete_task():
+    try:
+        selected = listbox.curselection()[0]
+        task_text = listbox.get(selected)
+
+        cursor.execute("DELETE FROM tasks WHERE task=?", (task_text,))
+        conn.commit()
+        load_tasks()
+    except:
+        messagebox.showwarning("Warning", "Select a task to delete!")
+
+def edit_task():
+    try:
+        selected = listbox.curselection()[0]
+        old_task = listbox.get(selected)
+        new_task = entry.get()
+
+        if new_task == "":
+            messagebox.showwarning("Warning", "Enter new task!")
+            return
+
+        cursor.execute("UPDATE tasks SET task=? WHERE task=?", (new_task, old_task))
+        conn.commit()
+        entry.delete(0, tk.END)
+        load_tasks()
+    except:
+        messagebox.showwarning("Warning", "Select a task to edit!")
+
+# ---------------- GUI ----------------
+root = tk.Tk()
+root.title("Task Manager")
+root.geometry("350x400")
+
+# Entry box
+entry = tk.Entry(root, width=30)
+entry.pack(pady=10)
+
+# Buttons
+tk.Button(root, text="Add Task", command=add_task).pack(pady=5)
+tk.Button(root, text="Edit Task", command=edit_task).pack(pady=5)
+tk.Button(root, text="Delete Task", command=delete_task).pack(pady=5)
+
+# Listbox
+listbox = tk.Listbox(root, width=40, height=15)
+listbox.pack(pady=10)
+
+# Load tasks initially
+load_tasks()
+
+# Run GUI
+root.mainloop()
+
+# Close DB
+conn.close()
