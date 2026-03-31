@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import messagebox
 import sqlite3
 
-# ---------------- DATABASE SETUP ----------------
 conn = sqlite3.connect("students.db")
 cursor = conn.cursor()
 
@@ -17,7 +16,6 @@ CREATE TABLE IF NOT EXISTS students (
 """)
 conn.commit()
 
-# ---------------- FUNCTION TO SAVE DATA ----------------
 def register_student():
     name = entry_name.get()
     email = entry_email.get()
@@ -34,18 +32,15 @@ def register_student():
 
     messagebox.showinfo("Success", "Student Registered Successfully!")
 
-    # Clear fields
     entry_name.delete(0, tk.END)
     entry_email.delete(0, tk.END)
     entry_course.delete(0, tk.END)
     entry_age.delete(0, tk.END)
 
-# ---------------- GUI SETUP ----------------
 root = tk.Tk()
 root.title("Student Registration Form")
 root.geometry("400x300")
 
-# Labels and Entry Fields
 tk.Label(root, text="Name").pack(pady=5)
 entry_name = tk.Entry(root)
 entry_name.pack()
@@ -62,11 +57,8 @@ tk.Label(root, text="Age").pack(pady=5)
 entry_age = tk.Entry(root)
 entry_age.pack()
 
-# Register Button
 tk.Button(root, text="Register", command=register_student).pack(pady=20)
 
-# Run GUI
 root.mainloop()
 
-# Close database connection
 conn.close()
