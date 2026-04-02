@@ -127,8 +127,8 @@ entry_guess.pack(pady=10)
 
 # Buttons
 tk.Button(root, text="Guess Movie", command=guess_word).pack(pady=5)
-tk.Button(root, text="Clear Input ❌", command=clear_input).pack(pady=5)
-tk.Button(root, text="Reset Game 🔄", command=reset_game).pack(pady=5)
+tk.Button(root, text="Clear Input ", command=clear_input).pack(pady=5)
+tk.Button(root, text="Reset Game ", command=reset_game).pack(pady=5)
 
 # Run app
 root.mainloop()
