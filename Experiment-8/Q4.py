@@ -84,6 +84,4 @@ load_tasks()
 
 # Run GUI
 root.mainloop()
-
-# Close DB
 conn.close()

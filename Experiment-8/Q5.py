@@ -66,7 +66,7 @@ def login():
 
 # ---------------- MAIN WINDOW ----------------
 root = tk.Tk()
-root.title("Login System")
+root.title("Login System")  
 root.geometry("300x250")
 
 tk.Label(root, text="Login", font=("Arial", 16)).pack(pady=10)
