@@ -25,8 +25,6 @@ class Student:
         else:
             print("Result: FAIL")
 
-
-# -------- Main Program --------
 n = int(input("Enter number of students: "))
 students = []
 
@@ -41,14 +39,11 @@ for i in range(n):
     s = Student(name, sap_id, phy, chem, maths)
     students.append(s)
 
-# Display details and results
 for s in students:
     s.display()
     print("Percentage:", s.find_marks_percentage())
     s.result()
 
-
-# Function to find class average
 def class_average(students):
     total = 0
     for s in students:
